@@ -11,9 +11,6 @@ public class HashMapProgram {
             int n = rand.nextInt(100) - 50;
             m.put(n, n);
         }
-
         System.out.println(m.show());
-        System.out.println("done");
-
     }
 }

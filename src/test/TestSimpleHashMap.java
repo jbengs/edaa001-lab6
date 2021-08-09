@@ -21,9 +21,9 @@ class TestSimpleHashMap {
 
 	@BeforeEach
 	void setUp() {
-		m = new SimpleHashMap<Integer, Integer>(10);
-		m16 = new SimpleHashMap<Integer, Integer>();
-		s = new SimpleHashMap<String, Integer>();
+		m = new SimpleHashMap<>(10);
+		m16 = new SimpleHashMap<>();
+		s = new SimpleHashMap<>();
 	}
 
 	@AfterEach
@@ -167,7 +167,7 @@ class TestSimpleHashMap {
 	@Test
 	void testManyPutAndRemove() {
 		java.util.Random random = new java.util.Random(123456);
-		HashSet<Integer> randNbrs = new HashSet<Integer>();
+		HashSet<Integer> randNbrs = new HashSet<>();
 		for (int i = 0; i < 100; i++) {
 			int r = random.nextInt(10000);
 			m16.put(r, r);
@@ -182,7 +182,7 @@ class TestSimpleHashMap {
 	@Test
 	void testManyPutAndGet() {
 		java.util.Random random = new java.util.Random(123456);
-		HashSet<Integer> randNbrs = new HashSet<Integer>();
+		HashSet<Integer> randNbrs = new HashSet<>();
 		for (int i = 0; i < 10000; i++) {
 			int r = random.nextInt(10000);			
 			m16.put(r, r);
@@ -194,7 +194,7 @@ class TestSimpleHashMap {
 	}
 	
 	@Test
-	void testputAndGetStringKeys() {
+	void testPutAndGetStringKeys() {
 		s.put("abc", 0);
 		s.put("def", 1);
 		s.put("ghi", 2);
@@ -202,10 +202,10 @@ class TestSimpleHashMap {
 		s.put("abc", 4);
 		assertEquals(4, s.size(), "wrong size():");
 		// Uses new String to make sure that target keys are different objects than those in the map.
-		assertEquals(Integer.valueOf(4), s.get(new String("abc")), "key not found in map: 1");
-		assertEquals(Integer.valueOf(1), s.get(new String("def")), "key not found in map: 17");
-		assertEquals(Integer.valueOf(2), s.get(new String("ghi")), "key not found in map: 33");
-		assertEquals(Integer.valueOf(3), s.get(new String("jkl")), "key not found in map: 49");
+		assertEquals(Integer.valueOf(4), s.get("abc"), "key not found in map: 1");
+		assertEquals(Integer.valueOf(1), s.get("def"), "key not found in map: 17");
+		assertEquals(Integer.valueOf(2), s.get("ghi"), "key not found in map: 33");
+		assertEquals(Integer.valueOf(3), s.get("jkl"), "key not found in map: 49");
 	}
 	
 	@Test
@@ -217,7 +217,7 @@ class TestSimpleHashMap {
 			s.put(Integer.toString(r), r);
 			randNbrs.add(r);
 		}
-		for (int i : randNbrs) {			
+		for (int i : randNbrs) {
 			assertEquals(Integer.valueOf(i), s.remove(Integer.toString(i)), "key not found in map:" + i);
 		}
 		assertEquals(0, m16.size(), "wrong size():");
