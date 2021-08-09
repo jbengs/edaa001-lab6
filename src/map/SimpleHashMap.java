@@ -175,31 +175,6 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
     }
 
     public void rehash() {
-        Entry<K, V>[] vector = (Entry<K, V>[]) new Entry[root.length * 2];
-        for (int i = 0; i < root.length; i++) {
-            if (root[i] != null) {
-                Entry<K, V> n = root[i];
-                do {
-                    put(n, vector);
-                    n = n.next;
-                } while (n != null);
-            }
-        }
-        root = vector;
-    }
-
-    private void put(Entry<K, V> obj, Entry<K, V>[] vector) {
-            int index = obj.getKey().hashCode() % vector.length;
-            if (index < 0) {
-                index = -index;
-            }
-            if (vector[index] == null) {
-                vector[index] = obj;
-            } else { //Note: reroutes the first element in the list instead of adding last
-                Entry<K, V> temp = vector[index].next;
-                vector[index] = obj;
-                vector[index].next = temp;
-            }
     }
 
 }
