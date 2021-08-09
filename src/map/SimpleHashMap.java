@@ -1,5 +1,7 @@
 package map;
 
+import java.util.ArrayList;
+
 public class SimpleHashMap<K, V> implements Map<K, V>{
     private Entry<K, V>[] root;
     private static double loadFactor;
@@ -166,6 +168,12 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
         return null;
     }
 
+    /**
+     * Calculates the index in the hash table, using the hashcode() method from the provided key,
+     * modulus length of hash table
+     * @param key
+     * @return the index of placement in the hash table
+     */
     private int index(K key) {
         int i = key.hashCode();
         if (i < 0) {
@@ -174,32 +182,20 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
         return i % root.length;
     }
 
-    public void rehash() {
+    private void rehash() {
         Entry<K, V>[] vector = (Entry<K, V>[]) new Entry[root.length * 2];
-        for (int i = 0; i < root.length; i++) {
-            if (root[i] != null) {
-                Entry<K, V> n = root[i];
+        ArrayList<Entry<K, V>> list = new ArrayList<>();
+        for (Entry<K, V> n : root) {
+            if (n != null) {
                 do {
-                    put(n, vector);
+                    list.add(n);
                     n = n.next;
                 } while (n != null);
             }
         }
         root = vector;
+        for (Entry<K, V> n : list) {
+            put(n.getKey(), n.getValue());
+        }
     }
-
-    private void put(Entry<K, V> obj, Entry<K, V>[] vector) {
-            int index = obj.getKey().hashCode() % vector.length;
-            if (index < 0) {
-                index = -index;
-            }
-            if (vector[index] == null) {
-                vector[index] = obj;
-            } else { //Note: reroutes the first element in the list instead of adding last
-                Entry<K, V> temp = vector[index].next;
-                vector[index] = obj;
-                vector[index].next = temp;
-            }
-    }
-
 }
