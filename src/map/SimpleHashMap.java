@@ -132,15 +132,15 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
     public String show() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < root.length; i++) {
-            sb.append(i + ": ");
             if (root[i] != null) {
+                sb.append(i + ": ");
                     Entry<K, V> n = root[i];
                     do {
                         sb.append(n.toString() + " ");
                         n = n.next;
                     } while (n != null);
+                sb.append("\n");
                 }
-            sb.append("\n");
             }
         return sb.toString();
     }
@@ -200,6 +200,6 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
                 vector[index] = obj;
                 vector[index].next = temp;
             }
-    }*/
+    }
 
 }

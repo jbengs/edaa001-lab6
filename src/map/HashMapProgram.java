@@ -11,7 +11,7 @@ public class HashMapProgram {
 //            m.put(i%5, i);
 //        }
         Random rand = new Random(12345);
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 10; i++) {
             int n = rand.nextInt(100) - 50;
             m.put(n, n);
         }
