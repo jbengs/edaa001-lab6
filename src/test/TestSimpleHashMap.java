@@ -21,9 +21,9 @@ class TestSimpleHashMap {
 
 	@BeforeEach
 	void setUp() {
-//		m = new SimpleHashMap<Integer, Integer>(10);
-//		m16 = new SimpleHashMap<Integer, Integer>();
-//		s = new SimpleHashMap<String, Integer>();
+		m = new SimpleHashMap<Integer, Integer>(10);
+		m16 = new SimpleHashMap<Integer, Integer>();
+		s = new SimpleHashMap<String, Integer>();
 	}
 
 	@AfterEach
@@ -183,7 +183,7 @@ class TestSimpleHashMap {
 	void testManyPutAndGet() {
 		java.util.Random random = new java.util.Random(123456);
 		HashSet<Integer> randNbrs = new HashSet<Integer>();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			int r = random.nextInt(10000);			
 			m16.put(r, r);
 			randNbrs.add(r);
