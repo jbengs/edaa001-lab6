@@ -168,7 +168,7 @@ class TestSimpleHashMap {
 	void testManyPutAndRemove() {
 		java.util.Random random = new java.util.Random(123456);
 		HashSet<Integer> randNbrs = new HashSet<Integer>();
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < 100; i++) {
 			int r = random.nextInt(10000);
 			m16.put(r, r);
 			randNbrs.add(r);
@@ -183,7 +183,7 @@ class TestSimpleHashMap {
 	void testManyPutAndGet() {
 		java.util.Random random = new java.util.Random(123456);
 		HashSet<Integer> randNbrs = new HashSet<Integer>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10000; i++) {
 			int r = random.nextInt(10000);			
 			m16.put(r, r);
 			randNbrs.add(r);
@@ -212,7 +212,7 @@ class TestSimpleHashMap {
 	void testManyPutAndRemoveStrings() {
 		java.util.Random random = new java.util.Random(123456);
 		HashSet<Integer> randNbrs = new HashSet<>();
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			int r = random.nextInt(10000);
 			s.put(Integer.toString(r), r);
 			randNbrs.add(r);

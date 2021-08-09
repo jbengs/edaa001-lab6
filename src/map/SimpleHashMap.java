@@ -50,7 +50,7 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
 
         @Override
         public String toString() {
-            return key.toString() + " = " + value.toString();
+            return key.toString() + "=" + value.toString();
         }
     }
 
@@ -130,15 +130,18 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
     }
 
     public String show() {
-
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < root.length; i++) {
             sb.append(i + ": ");
             if (root[i] != null) {
-                sb.append(root[i].toString());
-                //Implement all write outs
+                    Entry<K, V> n = root[i];
+                    do {
+                        sb.append(n.toString() + " ");
+                        n = n.next;
+                    } while (n != null);
+                }
+            sb.append("\n");
             }
-        }
         return sb.toString();
     }
 
@@ -149,7 +152,7 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
      * @return the Entry<K, V> object containing the key
      */
 
-    public Entry<K, V> find(K key) {
+    private Entry<K, V> find(K key) {
         int index = index(key);
         if (root[index] != null) {
             Entry<K, V> temp = root[index];
@@ -171,7 +174,7 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
         return i % root.length;
     }
 
-    private void rehash() {
+    public void rehash() {
         Entry<K, V>[] vector = (Entry<K, V>[]) new Entry[root.length * 2];
         for (int i = 0; i < root.length; i++) {
             if (root[i] != null) {
@@ -187,6 +190,9 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
 
     private void put(Entry<K, V> obj, Entry<K, V>[] vector) {
             int index = obj.getKey().hashCode() % vector.length;
+            if (index < 0) {
+                index = -index;
+            }
             if (vector[index] == null) {
                 vector[index] = obj;
             } else { //Note: reroutes the first element in the list instead of adding last
@@ -194,6 +200,6 @@ public class SimpleHashMap<K, V> implements Map<K, V>{
                 vector[index] = obj;
                 vector[index].next = temp;
             }
-    }
+    }*/
 
 }
